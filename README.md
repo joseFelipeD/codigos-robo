@@ -1,2 +1,2 @@
 # Novo repositorio
-Este repos de teste sera usado para compartilhar codigos da equipe
+Este repostório será usado para compartilhar codigos da equipe Mark VII
