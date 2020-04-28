@@ -61,7 +61,7 @@ void desvio(){
 		distancia_direita = vr_distancia_direita();
 		displayCenteredBigTextLine(4, "%d", distancia_direita);
 
-		setMultipleMotors(20, ME, MD);
+		setMultipleMotors(15, ME, MD);
 		wait(300, milliseconds);
 		stopAllMotors();
 	}
@@ -77,7 +77,7 @@ void desvio(){
 		distancia_direita = vr_distancia_direita();
 		displayCenteredBigTextLine(4, "%d", distancia_direita);
 
-		setMultipleMotors(20, ME, MD);
+		setMultipleMotors(15, ME, MD);
 		wait(300, milliseconds);
 		stopAllMotors();
 	}
@@ -114,27 +114,37 @@ void desvio(){
 	stopAllMotors();
 
 	//Vai pra frente até o sensor achar o obstaculo
-	distancia_direita = vr_distancia_direita();
 	while(distancia_direita >= 15){
 		distancia_direita = vr_distancia_direita();
 		displayCenteredBigTextLine(4, "%d", distancia_direita);
 
-		setMultipleMotors(10, ME, MD);
+		setMultipleMotors(15, ME, MD);
 		wait(300, milliseconds);
 		stopAllMotors();
 	}
 	stopAllMotors();
 
+//Vai pra frente até o sensor traseiro achar o obstaculo
+	int distancia_direita_tras = vr_distancia_direita_tras();
+	while(distancia_direita_tras >= 15){
+		distancia_direita_tras = vr_distancia_direita_tras();
+		displayCenteredBigTextLine(4, "%d", distancia_direita_tras);
 
-
-	//Vai até o meio do obstaculo
-	setMotor(ME,30);
-	moveMotor(MD,200,degrees, 30);
+		setMultipleMotors(15, ME, MD);
+		wait(300, milliseconds);
+		stopAllMotors();
+	}
 	stopAllMotors();
+
+	//Volta até o obstaculo
+	setMotor(ME, -30);
+	moveMotor(MD, 180, degrees, -30);
+	stopAllMotors();
+
 
 	//Vira
 	setMotor(ME,50);
-	moveMotor(MD,345,degrees, -50);
+	moveMotor(MD,330,degrees, -50);
 	stopAllMotors();
 
 	/*
@@ -168,33 +178,36 @@ void desvio(){
 
 
 	//Gira até a linha
-	int direita = getColorName(S3);
-	int esquerda = getColorName(S2);
-	int meio = getColorName(S4);
-
 	setMotor(ME, 15);
 	moveMotor(MD, 50, degrees, -15);
 	stopAllMotors();
 
+	int direita = getColorName(S3);
+	int esquerda = getColorName(S2);
+	int meio = getColorName(S4);
 
-	while(esquerda != 6){
-		esquerda = getColorName(S2);
-		displayCenteredBigTextLine(10, "%d", esquerda);
-		setMotor(ME, 15);
-		setMotor(MD, -15);
-	}
-
-	stopAllMotors();
-
-	meio = getColorName(S4);
-	while(meio!= 6){
-		meio = getColorName(S4);
-		displayCenteredBigTextLine(10, "%d", meio);
+	while(direita == 6){
+		direita = getColorName(S3);
+		displayCenteredBigTextLine(4, "%d", direita);
 		setMotor(MD, 15);
 		setMotor(ME, -15);
 	}
 
 	stopAllMotors();
+	playSound(soundLowBuzzShort);
+	wait(500, milliseconds);
+
+	meio = getColorName(S4);
+	while(meio == 6){
+		meio = getColorName(S4);
+		displayCenteredBigTextLine(4, "%d", meio);
+		setMotor(ME, 15);
+		setMotor(MD, -15);
+	}
+
+	stopAllMotors();
+	playSound(soundLowBuzzShort);
+	wait(500, milliseconds);
 
 	distancia = vr_distancia();
 	if(distancia > 4){
@@ -214,16 +227,42 @@ void desvio(){
 	}
 
 	stopAllMotors();
+	wait(500, milliseconds);
+
+	//Gira
+	setMotor(ME,50);
+	moveMotor(MD,560, degrees, -50);
+	stopAllMotors();
+	wait(500, milliseconds);
 
 	esquerda = getColorName(S2);
-	while(esquerda!= 6){
+	displayCenteredBigTextLine(4, "%d", esquerda);
+	while(esquerda == 6){
 		esquerda = getColorName(S2);
-		displayCenteredBigTextLine(10, "%d", esquerda);
+		displayCenteredBigTextLine(4, "%d", esquerda);
 		setMotor(ME, 15);
 		setMotor(MD, -15);
 	}
 
 	stopAllMotors();
+	wait(500, milliseconds);
+
+	//da uma pequena ré
+	setMotor(ME,-15);
+	moveMotor(MD,50,degrees, -15);
+	stopAllMotors();
+
+	meio = getColorName(S4);
+	displayCenteredBigTextLine(4, "%d", meio);
+	while(meio == 6){
+		meio = getColorName(S4);
+		displayCenteredBigTextLine(4, "%d", meio);
+		setMotor(MD, 15);
+		setMotor(ME, -15);
+	}
+
+	stopAllMotors();
+	wait(500, milliseconds);
 
 	playSound(soundFastUpwardTones);
 	wait(1, minutes);
