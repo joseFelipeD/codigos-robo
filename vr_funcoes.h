@@ -77,7 +77,7 @@ int vr_distancia_direita(){
 
 int vr_distancia_direita_tras(){
 
-	int valorEnvio = 4;
+	int valorEnvio = 5;
 
 	i2c_msg(ARDUINO_ADDRESS, 2, 1, valorEnvio, 3, true , 0, 0);
 	delay(50);
