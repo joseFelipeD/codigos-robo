@@ -12,13 +12,11 @@
 
 #include<vr_funcoes.h>
 #include<jf_desvio.h>
-#include<jf_desvioTeste.h>
 
 task main(){
 
 	while(true){
 		int distancia = vr_distancia();
-		int distancia_direita = vr_distancia_direita();
 
 		//displayCenteredBigTextLine(4, "%d", distancia);
 
